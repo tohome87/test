@@ -1,17 +1,263 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <title>Stretch3 播放器示範</title>
-  <style>
-    html, body { margin: 0; height: 100%; }
-    iframe { width: 100%; height: 100%; border: none; }
-  </style>
+<meta charset="UTF-8" />
+<title>天水圍循道衛理小學 放學狀況</title>
+<style>
+body {
+  font-family: "Microsoft JhengHei", sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(to bottom, #6fa8dc, #f0f4ff); /* 學校風格藍背景 */
+  transform-origin: top left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  zoom: calc(100% + (min(100vw, 1600px) - 800px) / 8);
+}
+
+h1 {
+  text-align: center;
+  margin: 0 0 15px 0;
+  font-size: 28px;
+  color: #1e3a8a; /* 深藍標題 */
+}
+
+.status-board {
+  max-width: 900px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.grade-row {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.grade-row.short {
+  grid-template-columns: 3fr repeat(5, 1fr);
+}
+
+.class-box {
+  padding: 10px 0;
+  background-color: #f87171; /* 紅色 */
+  color: white;
+  border: 2px solid black;  /* 黑色線框 */
+  border-radius: 5px;
+  text-align: center;
+  user-select: none;
+  font-size: 18px;
+ /* 新增：立體感與過渡動畫 */
+  transition: background-color 0.5s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+  background-image: linear-gradient(to bottom, #f87171, #dc2626);
+}
+.class-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dismissed {
+  background-color: #34d399 !important; /* 綠色 */
+  background-image: linear-gradient(to bottom, #6ee7b7, #10b981) !important;
+  border: 2px solid black;              /* 保持黑框 */
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+select,
+button {
+  padding: 6px 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+}
+
+button {
+  background-color: #2563eb; /* 深藍按鈕 */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1e40af; /* 更深藍 */
+}
+
+</style>
 </head>
 <body>
-  <iframe
-    src="https://stretch3.github.io/player/#project=https://raw.githubusercontent.com/tohome87/test/main/Fridge20250622_onsite.sb3"
-    allowfullscreen
-  ></iframe>
+
+<h1 style="text-align:center; margin-bottom: 15px;  margin-top:0;">天水圍循道衛理小學 放學狀況</h1>
+<div class="status-board">
+
+  <!-- 6年級 -->
+  <div class="grade-row" id="grade-6">
+    <div class="class-box" id="6A1">6A1 未放學</div>
+    <div class="class-box" id="6A2">6A2 未放學</div>
+    <div class="class-box" id="6B1">6B1 未放學</div>
+    <div class="class-box" id="6B2">6B2 未放學</div>
+    <div class="class-box" id="6C1">6C1 未放學</div>
+    <div class="class-box" id="6C2">6C2 未放學</div>
+    <div class="class-box" id="6D1">6D1 未放學</div>
+    <div class="class-box" id="6D2">6D2 未放學</div>
+  </div>
+
+  <!-- 5年級 -->
+  <div class="grade-row" id="grade-5">
+    <div class="class-box" id="5A1">5A1 未放學</div>
+    <div class="class-box" id="5A2">5A2 未放學</div>
+    <div class="class-box" id="5B1">5B1 未放學</div>
+    <div class="class-box" id="5B2">5B2 未放學</div>
+    <div class="class-box" id="5C1">5C1 未放學</div>
+    <div class="class-box" id="5C2">5C2 未放學</div>
+    <div class="class-box" id="5D1">5D1 未放學</div>
+    <div class="class-box" id="5D2">5D2 未放學</div>
+  </div>
+
+  <!-- 4年級 -->
+  <div class="grade-row" id="grade-4">
+    <div class="class-box" id="4A1">4A1 未放學</div>
+    <div class="class-box" id="4A2">4A2 未放學</div>
+    <div class="class-box" id="4B1">4B1 未放學</div>
+    <div class="class-box" id="4B2">4B2 未放學</div>
+    <div class="class-box" id="4C1">4C1 未放學</div>
+    <div class="class-box" id="4C2">4C2 未放學</div>
+    <div class="class-box" id="4D1">4D1 未放學</div>
+    <div class="class-box" id="4D2">4D2 未放學</div>
+  </div>
+
+  <!-- 3年級，5班靠右 -->
+  <div class="grade-row" id="grade-3">
+    <div></div><div></div><div></div> <!-- 3空白格 -->
+    <div class="class-box" id="3A">3A 未放學</div>
+    <div class="class-box" id="3B">3B 未放學</div>
+    <div class="class-box" id="3C">3C 未放學</div>
+    <div class="class-box" id="3D">3D 未放學</div>
+    <div class="class-box" id="3E">3E 未放學</div>
+  </div>
+  
+    <!-- 2年級，5班靠右 -->
+  <div class="grade-row" id="grade-2">
+
+    <select id="grade-select">
+      <option value="6">6年級</option>
+      <option value="5">5年級</option>
+      <option value="4">4年級</option>
+      <option value="3">3年級</option>
+      <option value="2" selected>2年級</option>
+      <option value="1">1年級</option>
+    </select>
+    <select id="class-select">
+      <option value="A">A班</option>
+      <option value="B">B班</option>
+      <option value="C">C班</option>
+      <option value="D">D班</option>
+      <option value="E">E班</option>
+    </select>
+      <button onclick="toggleStatus()">放學/還原</button>
+   	<div class="class-box" id="2A">2A 未放學</div>
+    <div class="class-box" id="2B">2B 未放學</div>
+    <div class="class-box" id="2C">2C 未放學</div>
+    <div class="class-box" id="2D">2D 未放學</div>
+    <div class="class-box" id="2E">2E 未放學</div>
+  </div>
+
+
+ <!-- 1年級，5班靠右 -->
+  <div class="grade-row" id="grade-1">
+    <div></div><div></div><div></div>
+    <div class="class-box" id="1A">1A 未放學</div>
+    <div class="class-box" id="1B">1B 未放學</div>
+    <div class="class-box" id="1C">1C 未放學</div>
+    <div class="class-box" id="1D">1D 未放學</div>
+    <div class="class-box" id="1E">1E 未放學</div>
+  </div>
+
+</div>
+
+<script>
+  // 動態更新班別選項
+  const highGrades = [6,5,4];
+  const lowGrades = [3,2,1];
+  const highClasses = ['A1','A2','B1','B2','C1','C2','D1','D2'];
+  const lowClasses = ['A','B','C','D','E'];
+
+  function updateClassSelect() {
+    const grade = document.getElementById('grade-select').value;
+    const classSelect = document.getElementById('class-select');
+    classSelect.innerHTML = '';
+
+    if (highGrades.includes(parseInt(grade))) {
+      highClasses.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c + '班';
+        classSelect.appendChild(opt);
+      });
+    } else {
+      lowClasses.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c + '班';
+        classSelect.appendChild(opt);
+      });
+    }
+  }
+
+  document.getElementById('grade-select').addEventListener('change', updateClassSelect);
+
+  // 初始設定
+  updateClassSelect();
+
+  // 狀態記錄
+  const statusMap = {};
+
+  function toggleStatus() {
+    const grade = document.getElementById('grade-select').value;
+    const cls = document.getElementById('class-select').value;
+    const id = grade + cls;
+    const box = document.getElementById(id);
+    if (!box) {
+      alert('找不到該班別!');
+      return;
+    }
+
+    if (statusMap[id]) {
+      statusMap[id] = false;
+      box.classList.remove('dismissed');
+      box.textContent = id + ' 未放學';
+    } else {
+      statusMap[id] = true;
+      box.classList.add('dismissed');
+      box.textContent = id + ' 已放學';
+    }
+  }
+  // 點擊方格也能切換狀態
+document.querySelectorAll('.class-box').forEach(box => {
+  box.addEventListener('click', () => {
+    const id = box.id;
+    if (!id) return;
+
+    if (statusMap[id]) {
+      statusMap[id] = false;
+      box.classList.remove('dismissed');
+      box.textContent = id + ' 未放學';
+    } else {
+      statusMap[id] = true;
+      box.classList.add('dismissed');
+      box.textContent = id + ' 已放學';
+    }
+  });
+});
+</script>
+
 </body>
 </html>
